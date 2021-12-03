@@ -14,6 +14,7 @@ spec:
     command:
       - "sleep"
       - "1200"
+</``>
 ---
 apiVersion: v1 
 kind: Pod 
