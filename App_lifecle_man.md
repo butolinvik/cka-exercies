@@ -2,7 +2,7 @@
 #Поменять образ в Deployment
 #укзаать или определить, какое количество подов могут быть включены или должны работать.
 
-
+`
 apiVersion: v1 
 kind: Pod 
 metadata:
@@ -25,7 +25,7 @@ spec:
     image: ubuntu
     command: ["sleep"]
     args: ["5000"]
-
+`
 #Command and arguments
 
 
