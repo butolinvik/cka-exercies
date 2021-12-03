@@ -1,4 +1,5 @@
    # Understand storage classes, persistent volumes
+   # Volumes
 # Какие типы volumes существуют на данный момент
 # Exercies configMap
 --- Создать под nginx, image nginx  который в качестве volumes использует configMap map-web с сключами nginx_base=nginx_base. Если нет данных в configMap, создать его ---
@@ -86,6 +87,55 @@ spec:
 -- Используется только с persistent volumes--
 # Examples projected
 -- может подключать разные типы волюмов ---
+   # Persistentvolumes
+# Exercies persistent Volumes
+
+-- Создать 4  PV со всеми возможноми уровнями Access Mode c типом nfc, local, hostPath(не в нашу смену). Чтоб затошнило
+1 - name: pvcyberhelp, AccessModes: ReadWriteOnce, type local, capacity: 10Gi (Требуется node affinity для local). Лейблы предварительно добавить на необходимую ноду
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvcyberhelp
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: slow
+  local:
+    path: /data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: pv
+          operator: In
+          values:
+          - pvtest
+2 - name: pvcyberhelp, AccessModes: ReadOnlyMany, type nfc, capacity: 10Gi
+
+3 - name: pvcyberhelp, AccessModes: ReadWriteMany, type azureDisk, capacity: 10Gi
+4 - name: pvcyberhelp, AccessModes: ReadWriteOncePod, type iscsi, capacity: 10Gi
+# Exercies persistent volume claims
+-- Создать pvc на основе созданных pv размером 5Gi --
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvccyberhelp
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: slow
+  selector:
+    matchLabels:
+      release: "pvcyberhelp"
+   # Storage classes
 
    # Understand volume mode, access modes and reclaim policies for volumes
    # Understand persistent volume claims primitive
