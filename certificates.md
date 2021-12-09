@@ -28,9 +28,10 @@ openssl genrsa -out ca.key 2048
 openssl req -x509 -new -nodes -key ca.key -subj "/CN=kubernetes" -days 600 -out ca.crt  
 
 Возможно, придется закоментировать строку vim /etc/ssl/openssl.cnf  
+RANDFILE   = $ENV::HOME/.rnd    
 Обратите внимание на subj. Это common name. Должен быть действительным именем доступным по dns. Иначе не заработает  
 
-RANDFILE   = $ENV::HOME/.rnd  
+
 </details> 
 
 
