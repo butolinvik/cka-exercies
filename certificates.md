@@ -40,14 +40,18 @@ RANDFILE   = $ENV::HOME/.rnd
  3) По каким dns имена можно подключиться?
  4) Срок действия сертификата
 <details>
-Поля
+Поля  
+
 Issuer: CN =  
+
 Subject: CN =  
-x509v3 Subject Alternative Name:  
-  DNS:
-Validity  
-   Not Before: 
-   Not After: 
+
+x509v3 Subject Alternative Name:    
+  DNS:  
+
+Validity    
+   Not Before:  
+   Not After:  
 </details>
 
 
