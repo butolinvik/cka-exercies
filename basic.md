@@ -14,6 +14,7 @@ kubectl create -f nginx.yaml
 
 #### Поменять образ пода на nginx:1.17
 <details>
+
 ``` bash
 # Один варинат
 kubectl edit pod nginx
