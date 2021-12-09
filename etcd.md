@@ -38,6 +38,7 @@ cd etcd-v3.5.1-linux-amd64/
 * ....... далее по желанию
 
 <details>
+
 ```bash
 
 param="--cert=/etc/kubernetes/pki/etcd/server.crt  --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt"
