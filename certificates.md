@@ -1,6 +1,8 @@
 # Определить сертификат, используемый kube-apiserver
+<details>
 > cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep .crt
 /etc/kubernetes/pki/apiserver.crt
+</details>
 # Сертификат для авторизации kube-apiserver на etcd-server
 /etc/kubernetes/pki/apiserver-etcd-client.crt
 # Ключ для авторизации kube-apiserver для аутентификации на kubelet сервере
