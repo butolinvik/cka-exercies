@@ -1,5 +1,6 @@
 #### Создать  под nginx имеративным и декларативным методом с образом nginx:1.16
-<details>
+<details>  
+
 * Imperative
 ``` bash
 kubectl run nginx --image=nginx:1.16
