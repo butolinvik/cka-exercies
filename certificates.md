@@ -3,10 +3,12 @@
 > cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep .crt
 /etc/kubernetes/pki/apiserver.crt
 </details>
-# Сертификат для авторизации kube-apiserver на etcd-server
+<details> Какой сертификат используется для авторизации kube-apiserver на etcd-server
 /etc/kubernetes/pki/apiserver-etcd-client.crt
-# Ключ для авторизации kube-apiserver для аутентификации на kubelet сервере
+</details>
+<details> Какой ключ для авторизации kube-apiserver для аутентификации на kubelet сервере
 /etc/kubernetes/pki/apiserver-kubelet-client.key
+</details>
 # Сертификат для работы etcd сервера
 etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
 # Определить корневой сертификат для etcd сервера. При стандартной установке корневой сертификат etcd и kube-apiserver совпадают. Для etcd может быть отдельный корневой центр сертификации
