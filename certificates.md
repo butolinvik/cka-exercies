@@ -69,6 +69,8 @@ cat myuser.csr | base64 | tr -d "\n"
 * Закинем в поле request получившийся текст  
 ``` yaml
 ---
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
 metadata:
   name: myuser
 spec:
