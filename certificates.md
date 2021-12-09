@@ -59,19 +59,25 @@ Validity
 https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/ 
 
 openssl genrsa -out myuser.key 2048  
-openssl req -new -key myuser.key -out myuser.csr
-</detail>
-
-#### Приведем к нормальному виду, чтобы в yaml файл запрос засунуть
-cat myuser.csr | base64 | tr -d "\n"
+openssl req -new -key myuser.key -out myuser.csr  
+Переведем полученный сертификат в Base64 формат  
+cat myuser.csr | base64 | tr -d "\n"  
+Закинем в поле request получившийся текст  
+---
 metadata:
   name: myuser
 spec:
-  request: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ1ZqQ0NBVDRDQVFBd0VURVBNQTBHQTFVRUF3d0dZV3R6YUdGNU1JSUJJakFOQmdrcWhraUc5dzBCQVFFRgpBQU9DQVE4QU1JSUJDZ0tDQVFFQXdsOXBXcE5UOGxVM1JSVi9vd0RISmMzeHRqUmJXUytTN0hOWmNYUWNRdUt3CmNhZTd6bjYzU1pLYk80VUdabHAwY1Y3eDA5K2xSaTE0NndVaW00eHQzZ2pVb1ZTYVlFQ1U0ZjZKa1FNaFRDSGcKZ0hnREdITitVQ2xBeDhLWStIOGxLTDhTWE9PamliVUs4MXVFRHdFRVRFUHc2T3pNYzVPcXFMRmdlUldQQmVheApQWlMzM0hvSEZWaXBUR1VVZXpiZ0ZsR3pacGdueTYxOHVldCtqMUdUdUxyMVZML0ZYbTU3YTJTTW93Q1VSU3VaCkd1RjdaZ3BoVHNtYnU0d0ZLamYwbEp6QzllU3BLTVNSVXpNZGY5ZU9JZEE3bDFYYWZ6eHFuOTY1M0VIWVVwOWYKYm1iQnpYT3VwR2xLVmlpdGp5bVgrVE4yUkF1amc5TzRHTWVaVFp1MTF3SURBUUFCb0FBd0RRWUpLb1pJaHZjTgpBUUVMQlFBRGdnRUJBQ0ZmaU5tWnVHLzZsYWVyeGM5ZVI0NG1ZcVFCN0ZkL1VGOFNNMWttbC9jUlpGTGw2NG1LCnVmalhQQnp4UTN4YW5MaXg3dVo4blovREY3ejA5U1RCYkh6aUpHcC9tYWhQV3pvTC84MzlqYjlXSjBlVmdtY2IKZjlUcGtubG4vVnVhQWRWeGVkRUh2a1JZRWNxTE8zcXpzSCtKMUJLMkxvTTZKN0pFbDlzU1ZoZmQxakJKRk8wKwpnT3cxZGZ1MGlJOGlTdW5OT1ZiTHM4RkdIZVd0NE42M2Fwc01ValI5UjJvUFZJbEljUUVWYkhLK1hqKzQwVHZTCjl4emRKOTF3SzFST0tjWDFiM2xlcS9OdDZsVDlvTWo2S1ZEaFBGb210UGVtQzQ5SUtVTmU2ZmxFcHFyWS9oN3EKOGx0Rm1Gd3J0L3AxdFBsaHdXRmgvdzZGK2RtRjNkQWhTQlE9Ci0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo= 
+  request: base64 text
   signerName: kubernetes.io/kube-apiserver-client
   
   usages:
   - client auth
+
+</detail>
+
+#### Приведем к нормальному виду, чтобы в yaml файл запрос засунуть
+
+
 
 # Проверить состояние запрос
 kubectl get csr
