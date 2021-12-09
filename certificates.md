@@ -78,18 +78,20 @@ spec:
   - client auth
 --- 
 ```
+* Выполняем запрос
 ``` bash
-kubectl create -f 
-* Проверим состояние запроса
+kubectl create -f myfile.yaml
+```
+* Проверка состояни запроса
+``` bash
+kubectl get csr
+```
+* Одобрить запрос сертификата
+``` bash
+kubectl certificate approve myuser
+```
+* Удалить запрос
+``` bash
+kubectl delete csr myuser
 ```
 </detail>
-
-# Проверить состояние запрос
-kubectl get csr
-# Разрешить получить сертификат
-kubectl certificate approve myuser
-# просмотреть существующие запросы
-
-# Узнать. к каким группам был сделан запрос
-kubectl get csr myuser -o yaml
-# Удалить запрос
