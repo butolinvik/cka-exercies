@@ -26,8 +26,8 @@ openssl genrsa -out ca.key 2048
 #### Сгегенрировать сертификат центра сертификации. (С ключом, который только что сгенерировали) на 600 дней
 <details>
 openssl req -x509 -new -nodes -key ca.key -subj "/CN=kubernetes" -days 10000 -out ca.crt  
-Возможно, придется закоментировать строку vim /etc/ssl/openssl.cnf
-RANDFILE   = $ENV::HOME/.rnd
+Возможно, придется закоментировать строку vim /etc/ssl/openssl.cnf  
+RANDFILE   = $ENV::HOME/.rnd  
 </details> 
 
 
