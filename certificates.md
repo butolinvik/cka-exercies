@@ -80,6 +80,7 @@ spec:
 ```
 ``` bash
 kubectl create -f 
+* Проверим состояние запроса
 ```
 </detail>
 
