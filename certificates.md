@@ -63,6 +63,7 @@ openssl req -new -key myuser.key -out myuser.csr
 Переведем полученный сертификат в Base64 формат  
 cat myuser.csr | base64 | tr -d "\n"  
 Закинем в поле request получившийся текст  
+``` yaml
 ---
 metadata:
   name: myuser
@@ -73,6 +74,7 @@ spec:
   usages:
   - client auth
 --- 
+```
 </detail>
 
 #### Приведем к нормальному виду, чтобы в yaml файл запрос засунуть
