@@ -57,13 +57,16 @@ Validity
 ### Создать запрос сертификата для для нового пользователя
 <details>
 https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/ 
-``` bash
+
+```bash
 openssl genrsa -out myuser.key 2048  
 openssl req -new -key myuser.key -out myuser.csr  
-Переведем полученный сертификат в Base64 формат  
+```
+* Переведем полученный сертификат в Base64 формат  
+```bash
 cat myuser.csr | base64 | tr -d "\n"  
 ```
-Закинем в поле request получившийся текст  
+* Закинем в поле request получившийся текст  
 ``` yaml
 ---
 metadata:
