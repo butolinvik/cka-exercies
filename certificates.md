@@ -1,4 +1,4 @@
-# Определить сертификат, используемый kube-apiserver
+#### Определить сертификат, используемый kube-apiserver
 <details>
 > cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep .crt
 /etc/kubernetes/pki/apiserver.crt
