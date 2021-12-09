@@ -78,7 +78,9 @@ spec:
   - client auth
 --- 
 ```
+``` bash
 kubectl create -f 
+```
 </detail>
 
 # Проверить состояние запрос
