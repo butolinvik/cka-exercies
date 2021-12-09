@@ -38,17 +38,22 @@ RANDFILE   = $ENV::HOME/.rnd
  1) Кто сделал запрос
  2) Какой Common Name
  3) По каким dns имена можно подключиться?
+ 4) Срок действия сертификата
 <details>
 Поля
 Issuer: CN =  
 Subject: CN =  
 x509v3 Subject Alternative Name:  
   DNS:
+Validity  
+   Not Before: 
+   Not After: 
 </details>
 <details>
 </details>
-<details>
-</details>
+
+
+
 # kube-apiserver
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
 
