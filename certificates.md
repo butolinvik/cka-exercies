@@ -1,20 +1,23 @@
 #### Определить сертификат, используемый kube-apiserver
 <details>
- cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep .crt
-/etc/kubernetes/pki/apiserver.crt
+ cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep .crt /etc/kubernetes/pki/apiserver.crt
 </details>
+
 #### Какой сертификат используется для авторизации kube-apiserver на etcd-server
  <details>
 /etc/kubernetes/pki/apiserver-etcd-client.crt
 </details>
+
 #### Какой ключ для авторизации kube-apiserver для аутентификации на kubelet сервере
 <details> 
 /etc/kubernetes/pki/apiserver-kubelet-client.key
 </details>
-# Сертификат для работы etcd сервера
-etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
-# Определить корневой сертификат для etcd сервера. При стандартной установке корневой сертификат etcd и kube-apiserver совпадают. Для etcd может быть отдельный корневой центр сертификации
+
+#### Определить корневой сертификат для etcd сервера. При стандартной установке корневой сертификат etcd и kube-apiserver совпадают. Для etcd может быть отдельный корневой центр сертификации
+</details>
 --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
+</details>
+
 # Посмотреть CN в сертификатах
 # kube-apiserver
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
