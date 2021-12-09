@@ -23,3 +23,32 @@ vim nginx.yaml
 kubectl replace -f nginx.yaml --force
 ```
 </details>
+
+#### Replicaset. Создать с именем nginx1, c образом nginx:1.17, c тремя репликами 
+<details>
+
+``` yaml
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx1
+  labels:
+    tier: nginx1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: nginx1
+  template:
+    metadata:
+      labels:
+        tier: nginx1
+    spec:
+      containers:
+      - name: nginx1
+        image: nginx:1.17
+---
+```
+
+</details>
