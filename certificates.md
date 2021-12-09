@@ -54,31 +54,12 @@ Validity
    Not After:  
 </details>
 
-
+### Создать запрос для нового пользователя
 <details>
-</details>
-
-
-
-# kube-apiserver
-openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
-
-# Кто запросил сертификат для центра сертификации?
-# kube-apiserver /etc/kubernetes/pki/ca.crt
-openssl x509 -in /etc/kubernetes/pki/ca.crt -text
-# Найти Subject Alternative Name для kube-apiserver
-openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
-# Common Name in ETCD certificate
-openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -text
-# Срок действия сертификата узнать
-Поле Validaty
-# Эмулировать неисправность
-Поменять путь к сертификату
-
-# Создать запрос для нового пользователя
-https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/
-openssl genrsa -out myuser.key 2048
-openssl req -new -key myuser.key -out myuser.csr
+https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/  
+openssl genrsa -out myuser.key 2048  
+openssl req -new -key myuser.key -out myuser.csr  
+</detail>
 # Приведем к нормальному виду, чтобы в yaml файл запрос засунуть
 cat myuser.csr | base64 | tr -d "\n"
 metadata:
