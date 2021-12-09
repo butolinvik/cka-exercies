@@ -43,12 +43,12 @@ cd etcd-v3.5.1-linux-amd64/
 param="--cert=/etc/kubernetes/pki/etcd/server.crt  --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt"
 
 ETCDCTL_API=3 ./etcdctl $param snapshot save /data/backup
-
+```
 #### Можно добавить с какой ноды снимаем бекап  
-
+``` bash
 ETCDCTL_API=3 ./etcdctl --endpoints https://192.168.145.28:2379 $param snapshot save /data/backup  
 ```
-####Add role  
+#### Add role  
 ``` bash
 ETCDCTL_API=3 ./etcdctl $param role add testrole1  
 
