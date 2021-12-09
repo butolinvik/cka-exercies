@@ -52,3 +52,17 @@ spec:
 ```
 
 </details>
+
+#### Deployments. Развернуть Deployments nginx c образом nginx, с 3 репликами декларативным и императивным способом
+<details>
+
+* Imperative
+``` bash
+kubectl create deployment nginx --image=nginx --replicas=3
+```
+* Declarative
+``` bash
+kubectl create deployment nginx --image=nginx --replicas=3 --dry-run=client -oyaml >nginx.yaml
+kubectl create -f nginx.yaml
+```
+</details>
