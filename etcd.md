@@ -31,15 +31,15 @@ cd etcd-v3.5.1-linux-amd64/
 * ....... далее по желанию
 <details>
 ``` bash
-param="--cert=/etc/kubernetes/pki/etcd/server.crt  --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt"
-ETCDCTL_API=3 ./etcdctl $param snapshot save /data/backup
-# Можно добавить с какой ноды снимаем бекап
-ETCDCTL_API=3 ./etcdctl --endpoints https://192.168.145.28:2379 $param snapshot save /data/backup
-# Add role
-ETCDCTL_API=3 ./etcdctl $param role add testrole1
-ETCDCTL_API=3 ./etcdctl $param role list
-# Аналогично с пользователем
-## Если у вас уже настроен кластер, то можно не качать etcd и утилиту etcdctl, а запускать напрямую из пода
+param="--cert=/etc/kubernetes/pki/etcd/server.crt  --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt"  
+ETCDCTL_API=3 ./etcdctl $param snapshot save /data/backup  
+# Можно добавить с какой ноды снимаем бекап  
+ETCDCTL_API=3 ./etcdctl --endpoints https://192.168.145.28:2379 $param snapshot save /data/backup  
+# Add role  
+ETCDCTL_API=3 ./etcdctl $param role add testrole1  
+ETCDCTL_API=3 ./etcdctl $param role list  
+# Аналогично с пользователем  
+## Если у вас уже настроен кластер, то можно не качать etcd и утилиту etcdctl, а запускать напрямую из пода  
 kubectl exec etcd-master -n kube-system -- ETCDCTL_API=3 etcdctl -cacert /etc/kubernetes/pki/etcd/ca.crt --cert /etc/kubernetes/pki/etcd/server.crt  --key /etc/kubernetes/pki/etcd/server.key" 
 ```
 </details>
