@@ -56,10 +56,12 @@ Validity
 
 ### Создать запрос для нового пользователя
 <details>
-https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/  
+https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/ 
+
 openssl genrsa -out myuser.key 2048openssl req -new -key myuser.key -out myuser.csr
 </detail>
-# Приведем к нормальному виду, чтобы в yaml файл запрос засунуть
+
+#### Приведем к нормальному виду, чтобы в yaml файл запрос засунуть
 cat myuser.csr | base64 | tr -d "\n"
 metadata:
   name: myuser
