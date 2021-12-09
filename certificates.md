@@ -14,9 +14,22 @@
 </details>
 
 #### Определить корневой сертификат для etcd сервера. При стандартной установке корневой сертификат etcd и kube-apiserver совпадают. Для etcd может быть отдельный корневой центр сертификации
-</details>
+<details>
 --etcd-cafile=/etc/kubernetes/pki/etcd/ca.crt
 </details>
+
+#### Сгегенрировать ключ центра сертификации. (Ключ для корневого центра сертификации)
+<details>
+openssl genrsa -out ca.key 2048
+</details> 
+
+#### Сгегенрировать сертификат центра сертификации. (С ключом, который только что сгенерировали) на 600 дней
+<details>
+openssl req -x509 -new -nodes -key ca.key -subj "/CN=kubernetes" -days 10000 -out ca.crt
+Возможно, придется закоментировать строку vim /etc/ssl/openssl.cnf
+RANDFILE   = $ENV::HOME/.rnd
+</details> 
+
 
 # Посмотреть CN в сертификатах
 # kube-apiserver
