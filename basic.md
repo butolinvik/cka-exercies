@@ -66,3 +66,37 @@ kubectl create deployment nginx --image=nginx --replicas=3 --dry-run=client -oya
 kubectl create -f nginx.yaml
 ```
 </details>
+
+#### Поменять образ созданного deployments с nginx на nginx:1.16/. 
+* Просмотреть историю изменений.
+*  Вернуться после измений образ на начальныйю
+*   Расширить реплики до 5.
+*  Уменьшить количество хранимой истории изменений до 3. Подсказка(параметр .spec.revisionHistoryLimit)
+<details>
+
+``` bash
+ kubectl get deployments.apps
+ kubectl set image deployment.v1.apps/nginx nginx=nginx:1.17
+ # or
+ kubectl set image deployment/nginx nginx=nginx:1.17
+ # or
+ kubectl eidt deployment/nginx
+``` 
+* check
+``` bash
+kubectl rollout status deployment/nginx
+#or
+kubectl rollout status deployment nginx
+kubectl get rs
+# History
+kubectl rollout history deployment/nginx
+# Подробности ревизии
+kubectl rollout history deployment nginx --revision 1
+# Возврат к первой ревизии
+kubectl rollout undo deployment nginx --to-revision=1
+# Увеличиваем реплики до 5
+kubectl scale deployment nginx --replicas=5
+# Меняем количество хранимых ревизий
+.spec.revisionHistoryLimit: 3
+```
+</details>
