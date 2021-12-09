@@ -25,15 +25,30 @@ openssl genrsa -out ca.key 2048
 
 #### Сгегенрировать сертификат центра сертификации. (С ключом, который только что сгенерировали) на 600 дней
 <details>
-openssl req -x509 -new -nodes -key ca.key -subj "/CN=kubernetes" -days 10000 -out ca.crt  
+openssl req -x509 -new -nodes -key ca.key -subj "/CN=kubernetes" -days 600 -out ca.crt  
 
 Возможно, придется закоментировать строку vim /etc/ssl/openssl.cnf  
+Обратите внимание на subj. Это common name. Должен быть действительным именем доступным по dns. Иначе не заработает  
 
 RANDFILE   = $ENV::HOME/.rnd  
 </details> 
 
 
-# Посмотреть CN в сертификатах
+#### Посмотреть информацию о сертификатах и ответить на вопросы:
+ 1) Кто сделал запрос
+ 2) Какой Common Name
+ 3) По каким dns имена можно подключиться?
+<details>
+Поля
+Issuer: CN =  
+Subject: CN =  
+x509v3 Subject Alternative Name:  
+  DNS:
+</details>
+<details>
+</details>
+<details>
+</details>
 # kube-apiserver
 openssl x509 -in /etc/kubernetes/pki/apiserver.crt -text
 
