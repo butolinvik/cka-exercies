@@ -14,3 +14,16 @@ https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
 https://kubernetes.io/docs/tasks/administer-cluster/access-cluster-api/  
 
 </details>
+
+#### kube-controller manager  
+<details>
+
+* Чем занимается? Где конфиги? 
+  Мониторит состояние кластера, его компонентов
+```bash
+cat /etc/kubernetes/manifests/kube-controller-manager.yaml  
+k -n kube-system get pods | grep controller  
+
+```
+    
+</details>
