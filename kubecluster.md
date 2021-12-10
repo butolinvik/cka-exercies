@@ -1,5 +1,6 @@
 #### kube-api server
 <details>  
+
 * Найти, где находится конфигурация  
 ```bash  
 cat /etc/kubernetes/manifests/kube-apiserver.yaml  
