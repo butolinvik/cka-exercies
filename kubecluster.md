@@ -27,3 +27,15 @@ k -n kube-system get pods | grep controller
 ```
     
 </details>
+
+#### kube-scheduler
+<details>
+</details>
+
+### kubelet
+<details>
+</details>
+
+#### kube-proxy
+<details>
+</details>
