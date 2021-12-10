@@ -108,3 +108,39 @@ spec:
 status: {}
 ```
 </details>
+
+#### Taints and Tolerations
+#### taint - Ни один под не должен запуститься на этой ноде, если ноде не указано иное(tolerations)
+#### Добавить taint ноде. Создать под, чтобы мог запускаться на ноде
+
+<details>
+
+* При условии, что есть taint с любым значением
+```bash
+kubectl taint node victoria key=val:NoSchedule  
+
+```
+```yaml
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  tolerations:
+  - key:
+    operator: "Exists"
+    effect: "NoSchedule"
+status: {}
+```
+
+</details>
