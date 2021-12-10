@@ -3,9 +3,11 @@
 <details>  
 ```bash
 cat /etc/kubernetes/manifests/kube-apiserver.yaml
-# Если установили, как демона, т в дебиан подобных системах может быть где-нибудь вроде
+
 cat /etc/systemd/system/kube-apiserver.service
-# Можно посмотреть процессы api-server
+
+#Можно посмотреть процессы api-server
+
 ps -aux | grep -i apiserver
 ```
 https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/  
