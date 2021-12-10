@@ -76,4 +76,35 @@ spec:
 status: {}
 ```
 
+* Сделать то же самое с deployment
+
+```yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}
+      nodeSelector:
+        key: val
+status: {}
+```
 </details>
