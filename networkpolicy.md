@@ -1,7 +1,7 @@
 #### Network Policy
 * Создать три namespase web,monitoring,databases
 * Создать под nginx в ns web, prometheus в monitoring, postgresql in databases
-* Проверить взаимодоступность подов через curl (Чтобы не заморачиваться, можно добавить в поды prometheus и postgresql образ nginx для доступности curl. его нет в Проме и posgresql подах)
+* Проверить доступность подов через curl 
 * через IP
 * через полное dns имя
 
@@ -104,8 +104,8 @@ status: {}
 
 ```bash
 kubectl get pods -A -owide
-kubectl -n web exec nginx -- curl prometheus.monitoring.svc.cluster.local:9090  
-
+kubectl -n web exec nginx -- curl 10.40.0.2:9090  
+curl 10.40.0.2:9090
 ```
 
 </details>
@@ -116,5 +116,46 @@ kubectl -n web exec nginx -- curl prometheus.monitoring.svc.cluster.local:9090
 ```bash
 kubectl -n web exec nginx -- curl prometheus.monitoring.svc.cluster.local:9090  
 ```
+
+</details>
+
+### Запретить доступ к подам prometheus,nginx,postgresql на исходящие и входящие коннекты
+
+<details>
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-ns-web
+  namespace: web
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-ns-monitoring
+  namespace: monitoring
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-ns-databases
+  namespace: web
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ```
 
 </details>
