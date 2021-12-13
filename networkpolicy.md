@@ -159,3 +159,64 @@ spec:
   ```
 
 </details>
+
+* Разрешить входящий трафик по необходимым порта для созданных подов
+* Пример: Разрешить curl с nginx на prometheus. Обратите внимание, некоторые лейблы не существуют. Их надо добавить. Чуть попутал все, чтобы мозги напрягались.
+<details>
+
+```yaml
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nginx-np-allow
+  namespace: web
+spec:
+  podSelector:
+    matchLabels:
+      ns: testcurl
+  policyTypes:
+  - Ingress
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          ns: testcurl
+    - podSelector:
+        matchLabels:
+          run: prometheus
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 9090
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: prometheus-np-allow
+  namespace: monitoring
+spec:
+  podSelector:
+    matchLabels:
+      run: prometheus
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          ns: ng
+    - podSelector:
+        matchLabels:
+          ns: testcurl
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 9090
+```
+
+</details>
