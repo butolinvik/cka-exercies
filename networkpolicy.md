@@ -90,5 +90,6 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}
+```
 </details>
 
