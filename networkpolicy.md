@@ -36,7 +36,7 @@ status: {}
 
 </details>
 
-* Pods
+* Pods create
 <details>
 
 ```yaml
@@ -110,7 +110,7 @@ curl 10.40.0.2:9090
 
 </details>
 
-* Проверка доступности через curl по fqdn
+* Проверка доступности через curl по fqdn. Спойлер - работать не будет. Решение. Разрешить dns запросы. Код будет ниже
 <details>
 
 ```bash
@@ -191,6 +191,18 @@ spec:
       port: 80
     - protocol: TCP
       port: 9090
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          link: db
+    - podSelector:
+        matchLabels:
+          link: db
+    ports:
+    - protocol: TCP
+      port: 5432
+    - protocol: TCP
+      port: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -217,6 +229,59 @@ spec:
       port: 80
     - protocol: TCP
       port: 9090
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: posgresql-np-allow
+  namespace: databases
+spec:
+  podSelector:
+    matchLabels:
+      run: postgresql
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          ns: ng
+    - podSelector:
+        matchLabels:
+          ns: testcurl
+    ports:
+    - protocol: TCP
+      port: 80
+    - protocol: TCP
+      port: 5432
+```
+
+</details>
+
+* Разрешить исходящие dns запросы. 
+<details>
+
+```yaml
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: np-dns-allow
+  namespace: web
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  egress:
+  - to:
+    ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
 ```
 
 </details>
