@@ -1,7 +1,9 @@
 #### Network Policy
 * Создать три namespase web,monitoring,databases
 * Создать под nginx в ns web, prometheus в monitoring, postgresql in databases
-* Проверить взаимодоступность подов через curl
+* Проверить взаимодоступность подов через curl (Чтобы не заморачиваться, можно добавить в поды prometheus и postgresql образ nginx для доступности curl. его нет в Проме и posgresql подах)
+* через IP
+* через полное dns имя
 
 <details>
 
@@ -69,6 +71,8 @@ spec:
   containers:
   - image: prom/prometheus
     name: prometheus
+  - image: nginx
+    name: nginx
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
@@ -86,6 +90,8 @@ spec:
   containers:
   - image: postgres:10.4
     name: postgresql
+  - image: nginx
+    name: nginx
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
@@ -93,3 +99,22 @@ status: {}
 ```
 </details>
 
+* Проверка доступности через curl. По айпишнику
+<details>
+
+```bash
+kubectl get pods -A -owide
+kubectl -n web exec nginx -- curl prometheus.monitoring.svc.cluster.local:9090  
+
+```
+
+</details>
+
+* Проверка доступности через curl по fqdn
+<details>
+
+```bash
+kubectl -n web exec nginx -- curl prometheus.monitoring.svc.cluster.local:9090  
+```
+
+</details>
