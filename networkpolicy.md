@@ -119,7 +119,7 @@ kubectl -n web exec nginx -- curl prometheus.monitoring.svc.cluster.local:9090
 
 </details>
 
-### Запретить доступ к подам prometheus,nginx,postgresql на исходящие и входящие коннекты
+* Запретить доступ к подам prometheus,nginx,postgresql на исходящие и входящие коннекты
 
 <details>
 
