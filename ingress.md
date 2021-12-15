@@ -65,12 +65,59 @@ kubectl expose pod httpd --port=80 --name path2
 
 * Секурность
 * Сначала детально посмотрим, что происходит, когда подключение идет через https
+* Создать сертификат для подключения по https
+* Создать secrets с полученным ключом и сертификатом
+* Добавить in конфиг ingress полученный secret
+* Проверить результат чере curl
 
 <details>
 
 ```bash
 curl https://cks-master.cyberhelp.pro:30667/path1 -kv  
-curl https://cks-master.cyberhelp.pro:30667/path2 -kv
+curl https://cks-master.cyberhelp.pro:30667/path2 -kv  
+# Create certificate. fqdn cks-master.cyberhelp.pro
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes  
+kubectl create secret tls secure-ingress --key=./key.pem --cert=./cert.pem  
+
+
+```
+
+```yaml
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-test
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - cks-master.cyberhelp.pro
+    secretName: secure-ingress
+  rules:
+  - host: cks-master.cyberhelp.pro
+    http:
+      paths:
+      - path: /path1
+        pathType: Prefix
+        backend:
+          service:
+            name: path1
+            port:
+              number: 80
+      - path: /path2
+        pathType: Prefix
+        backend:
+          service:
+            name: path2
+            port:
+              number: 80
+```
+
+```bash
+#Имитируем подключение по доменному имени, на которое сгенерировали сертификат
 
 ```
 

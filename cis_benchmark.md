@@ -1,0 +1,21 @@
+#### Рекомендации по безопасности/ Учебник CIS Kubernetes Benchmark
+#### Развернуть по, которое проверяет на соответствие установкам безопасности
+
+<details>
+
+```bash
+
+# how to run
+https://github.com/aquasecurity/kube-bench/blob/main/docs/running.md
+
+
+# run on master
+docker run --pid=host -v /etc:/etc:ro -v /var:/var:ro -t aquasec/kube-bench:latest run --targets=master --version 1.22
+
+# run on worker
+docker run --pid=host -v /etc:/etc:ro -v /var:/var:ro -t aquasec/kube-bench:latest run --targets=node --version 1.22
+
+
+```
+
+</details>
