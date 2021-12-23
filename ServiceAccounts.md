@@ -9,8 +9,6 @@
 kubectl create serviceaccount testsvc  
 kubectl get serviceaccounts,secret  
 kubectl describe secrets testsvc-token-76df2  
-
-
 ```
 
 ```yaml
