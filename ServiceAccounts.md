@@ -5,6 +5,7 @@
 * Где внутри пода хранятся данные о сервиаккаунте?
 <details>
 ```bash
+
 kubectl create serviceaccount testsvc  
 kubectl get serviceaccounts,secret  
 kubectl describe secrets testsvc-token-76df2  
