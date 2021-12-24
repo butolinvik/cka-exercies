@@ -32,9 +32,21 @@ status: {}
 ```
 
 ```bash
+mount | grep secret  
 ls /run/secrets/kubernetes.io/serviceaccount/  
+curl https://kubernetes -kv  
+
 ```
 </details>
 
-* 
-* 
+* Настроить serviceaccount права для чтения подов, редактирования, удаления и т.д.
+
+<details>
+
+```bash
+kubectl auth can-i delete pod --as testsvc  
+kubectl auth can-i delete pod --as system:serviceaccount:default:testsvc  
+kubectl create clusterrolebinding tessvc --clusterrole=edit --serviceaccount default:testsvc
+
+
+</details>
