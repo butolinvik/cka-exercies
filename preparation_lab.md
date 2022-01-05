@@ -25,6 +25,14 @@ do
 
 kubectl create role role${i} -n ns10 --resource=pod,configmaps --verb=create,delete
 
+done  
+#Delete roles
+#!/bin/bash
+for (( i =0; i < 20; i++))
+do
+
+kubectl delete role role${i} -n ns10
+
 done
 ```
 
