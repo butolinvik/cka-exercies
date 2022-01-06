@@ -48,7 +48,7 @@ kubectl exec nginx -- env
 </details>
  
  ####  Вскрыть  secrets только что созданные
- <details>
+<details>
 ```bash
 # Определяем сначала где у нас создался под  
 kubectl get pods -owide  
@@ -58,4 +58,4 @@ critctl inspect container_id
 crictl inspect 3bd5a79dd7829 | grep pid  
 cat /proc/26707/root/etc/secrets/user  
 ```
- </details>
+</details>
