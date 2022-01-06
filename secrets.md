@@ -1,8 +1,10 @@
 #### Создать 2 secrets и добавить к созданному поду
 * Прибиндить как файловую систему
 * Прибиндить как env var
-<details>  
-```bash
+<details>
+  
+```bash  
+# sdfasdf
 kubectl run nginx --image=nginx --dry-run=client -oyaml >nginx.yaml  
 kubectl create secret generic sec --from-literal=user=admin  
 kubectl create secret generic sec1 --from-literal=pass=PassWord  
@@ -50,8 +52,9 @@ kubectl exec nginx -- env
 ####  Вскрыть  secrets только что созданные
 
 <details>
+
 ```bash
-#Определяем сначала где у нас создался под  
+# Определяем сначала где у нас создался под  
 kubectl get pods -owide  
 critctl ps  
 critctl inspect container_id  
