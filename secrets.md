@@ -48,6 +48,7 @@ kubectl exec nginx -- env
 </details>
  
 ####  Вскрыть  secrets только что созданные
+
 <details>
 ```bash
 # Определяем сначала где у нас создался под  
