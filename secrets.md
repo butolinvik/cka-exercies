@@ -51,11 +51,11 @@ kubectl exec nginx -- env
 
 <details>
 ```bash
-# Определяем сначала где у нас создался под  
+#Определяем сначала где у нас создался под  
 kubectl get pods -owide  
 critctl ps  
 critctl inspect container_id  
-# Разделы env and mounts  
+#Разделы env and mounts  
 crictl inspect 3bd5a79dd7829 | grep pid  
 cat /proc/26707/root/etc/secrets/user  
 ```
