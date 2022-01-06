@@ -6,7 +6,7 @@
 kubectl run nginx --image=nginx --dry-run=client -oyaml >nginx.yaml  
 kubectl create secret generic sec --from-literal=user=admin  
 kubectl create secret generic sec1 --from-literal=pass=PassWord  
-```
+
 
 ```yaml
 ---
