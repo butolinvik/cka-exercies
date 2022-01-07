@@ -2,7 +2,7 @@
 * Прибиндить как файловую систему
 * Прибиндить как env var
 <details>
-  
+
 ```bash  
 # sdfasdf
 kubectl run nginx --image=nginx --dry-run=client -oyaml >nginx.yaml  
@@ -62,4 +62,16 @@ critctl inspect container_id
 crictl inspect 3bd5a79dd7829 | grep pid  
 cat /proc/26707/root/etc/secrets/user  
 ```
+</details>
+
+#### Захакать ETCD
+
+<details>
+
+```bash  
+cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep etcd  
+ETCDCTL_API=3 etcdctl --cert /etc/kubernetes/pki/apiserver-etcd-client.crt --key /etc/kubernetes/pki/apiserver-etcd-client.key --cacert /etc/kubernetes/pki/etcd/ca.crt get /registry/secrets/default/sec1  
+ETCDCTL_API=3 etcdctl --cert /etc/kubernetes/pki/apiserver-etcd-client.crt --key /etc/kubernetes/pki/apiserver-etcd-client.key --cacert /etc/kubernetes/pki/etcd/ca.crt get /registry/secrets/default/sec  
+```
+
 </details>
