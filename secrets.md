@@ -72,6 +72,32 @@ cat /proc/26707/root/etc/secrets/user
 cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep etcd  
 ETCDCTL_API=3 etcdctl --cert /etc/kubernetes/pki/apiserver-etcd-client.crt --key /etc/kubernetes/pki/apiserver-etcd-client.key --cacert /etc/kubernetes/pki/etcd/ca.crt get /registry/secrets/default/sec1  
 ETCDCTL_API=3 etcdctl --cert /etc/kubernetes/pki/apiserver-etcd-client.crt --key /etc/kubernetes/pki/apiserver-etcd-client.key --cacert /etc/kubernetes/pki/etcd/ca.crt get /registry/secrets/default/sec  
-```
+# Encription ETCD  
+* https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
+cd /etc/kubernetes/  
+mkdir etcd  
+cd etcd/  
+vim ec.yaml  
+# Прежде чем заполнить файл, переведем наши данные секретные в base64. -n убирает символ перевода строки
+echo -n PassWord | base64  
+cd ../manifests/  
+vim kube-apiserver.yaml  
+# Add encription provider config
+ - --encryption-provider-config=/etc/kubernetes/etcd/ec.yaml  
+ # После добавляем в volumes директорию с нашим конфигом аналогично pki. Ну в раздел volumeMounts так же добавлям это volume  
+ ```
+ ```yaml
+ ---
+ volumes:
+ - hostPath:
+      path: /etc/kubernetes/etcd
+      type: DirectoryOrCreate
+    name: etcd
+   volumeMounts:
+   - mountPath: /etc/kubernetes/etcd
+      name: etcd
+      readOnly: true
+   
+ ```
 
 </details>
