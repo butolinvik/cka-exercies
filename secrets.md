@@ -99,5 +99,19 @@ vim kube-apiserver.yaml
       readOnly: true
    
  ```
-
+```bash  
+# Check  
+ps aux | grep apiserver  
+cd /var/log/pods/  
+# Not working becouse short pass  
+# Сначала настроить шифрование на всех нодах. После этого создать secret и его уже не будет видно в etcd  
+kubectl create secret generic secure-secret --from-literal pass=1234  
+ETCDCTL_API=3 etcdctl --cert /etc/kubernetes/pki/apiserver-etcd-client.crt --key /etc/kubernetes/pki/apiserver-etcd-client.key --cacert /etc/kubernetes/pki/etcd/ca.crt get /registry/secrets/default/secure-secret  
+kubectl get secrets  very-secure -oyaml  
+# Все-равно видно))
+echo MTIzNA== | base64 -d  
+# Чтобы зашифровать default secret. Удаляем его и он заново создастся  
+# Encript all secrets  
+kubectl get secrets -A -oyaml | kubectl replace -f -  
+```
 </details>
