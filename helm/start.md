@@ -5,3 +5,8 @@ helm create mychart
 # Проверка отработки шаблонов
 helm install --dry-run --debug ./vicchat --generate-name
 
+# Обновление пакета
+```bash
+helm upgrade vmagent ./vmagent/  
+
+```
