@@ -10,6 +10,11 @@ export now="--force --grace-period 0" # удалить под моменталь
 #Редактируем ~/.vimrc, чтобф автоматический таб в vim вел себя нормально, а не делал адского размера пробелы  
 set tabstop=2  
 set expandtab  
-set shiftwith=2
+set shiftwith=2  
+# Заготовить контексты. Не обязательно рабочие  
+kubectl config set-context test1
+kubectl config set-context test2
+kubectl config set-context test3
+kubectl config set-context test4 #etc.
 ```
 
