@@ -57,3 +57,14 @@ spec:
   restartPolicy: Always
 status: {}
 ```
+### 3 задание
+```bash
+# Создать StatefulSet c 
+```
+#### 4 задание
+```yaml
+#Liveness probe
+* 
+---
+
+```
